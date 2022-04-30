@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import slide1 from '../../assets/images/slider1.png'
@@ -11,7 +11,7 @@ import slide7 from '../../assets/images/slider7.png'
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
-import "swiper/css/autoplay";
+
 
 
 
@@ -27,6 +27,10 @@ export default function Banner() {
         pagination={{
           type: "progressbar",
         }}
+        autoplay={{
+            delay: 2500,
+           
+          }}
        
         modules={[Pagination, Autoplay]}
         className="mySwiper"
