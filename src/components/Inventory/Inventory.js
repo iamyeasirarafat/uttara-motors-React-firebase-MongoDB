@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
 
 const Inventory = () => {
@@ -12,13 +13,28 @@ const Inventory = () => {
         });
     }, [])
     const { name, description, imgUrl, price, quantity, supliar, specification } = product;
-    const handleDeliver = (e) =>{
+    const handleDeliver =  (e) =>{
         e.preventDefault();
         const {quantity, ...rest} = product;
          const newQuantity = quantity - 1;
-         const newProduct = {quantity:newQuantity, ...rest};
+         const newQuantityString = newQuantity.toString()
          
-        console.log(newProduct);
+         const newProduct = {quantity:newQuantityString, ...rest};
+         console.log(newProduct);
+         fetch(URL, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(newProduct)
+        })
+            .then(response => response.json())
+            .then(data => {
+                toast.success('You have successfully Delivered')
+               console.log(data);
+            })
+
+        
     }
 
     return (
