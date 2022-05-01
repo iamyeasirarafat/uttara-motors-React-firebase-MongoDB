@@ -1,52 +1,43 @@
+import { signOut } from 'firebase/auth';
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { Link } from 'react-router-dom';
 import logo from '../../assets/images/logo.png'
+import auth from '../../firebase/firebase.init';
 const Nav = () => {
-    return (
-        <div className="bg-slate-50  ">
-    <div className="navbar w-10/12 mx-auto ">
-  <div className="flex-1">
-    {/* <a href="/" className="btn btn-ghost normal-case text-xl">Uttara Motors</a> */}
-    <img className="w-40" src={logo} alt="" />
-  </div>
-  <div className="flex-none">
-    <div className="dropdown dropdown-end">
-      <label tabIndex="0" className="btn btn-ghost btn-circle">
-        <div className="indicator">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
-          <span className="badge badge-sm indicator-item">8</span>
+  const [user, loading] = useAuthState(auth);
+  if (loading) {
+    return <p className='text-center text-slate-300'>initializing navbar ....</p>
+  }
+  return (
+    <div className="bg-slate-50 max-h-16 ">
+      <div className="navbar w-10/12 mx-auto p-0 ">
+        <div className="flex-1">
+            <Link to='/'><img className="w-36" src={logo} alt="" /></Link>
         </div>
-      </label>
-      <div tabIndex="0" className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow">
-        <div className="card-body">
-          <span className="font-bold text-lg">8 Items</span>
-          <span className="text-info">Subtotal: $999</span>
-          <div className="card-actions">
-            <button className="btn btn-primary btn-block">View cart</button>
-          </div>
+        <div className="flex-none">
+          {
+            user ? <div className="dropdown dropdown-end">
+            <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
+              <div className="w-10 rounded-full">
+                <img src="https://api.lorem.space/image/face?hash=33791" />
+              </div>
+            </label>
+            <ul tabIndex="0" className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+              <li>
+                <a href="/" className=" m-0">
+                  Profile
+                 </a>
+              </li>
+              <li><a href="/" className='m-0'>Settings</a></li>
+              <li><a href="" onClick={()=>signOut(auth)} className='m-0'>Logout</a></li>
+            </ul>
+          </div> : <Link to="/login" title='Login/Register' className='btn m-0 btn-circle'><i className="fa-solid fa-user-plus"></i></Link>
+          }
         </div>
       </div>
     </div>
-    <div className="dropdown dropdown-end">
-      <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
-        <div className="w-10 rounded-full">
-          <img src="https://api.lorem.space/image/face?hash=33791" />
-        </div>
-      </label>
-      <ul tabIndex="0" className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-        <li>
-          <a href="/" className="justify-between">
-            Profile
-            <span className="badge">New</span>
-          </a>
-        </li>
-        <li><a href ="/">Settings</a></li>
-        <li><a href ="/">Logout</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
-        </div>
-    );
+  );
 };
 
 export default Nav;

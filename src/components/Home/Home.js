@@ -7,7 +7,7 @@ const Home = () => {
     const [products, setProducts] = useState([])
     useEffect(() => {
         axios.get(' https://pure-citadel-40053.herokuapp.com/').then(resp => {
-            setProducts(resp.data.slice(0,3))
+            setProducts(resp.data.slice(0,6))
         });
     }, [])
        
