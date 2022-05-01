@@ -1,19 +1,45 @@
 import React, { useState } from 'react';
-import { useCreateUserWithEmailAndPassword, useSignInWithFacebook, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth'
+import { useCreateUserWithEmailAndPassword, useSignInWithEmailAndPassword, useSignInWithFacebook, useSignInWithGithub, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth'
 import auth from '../../firebase/firebase.init';
 import './login.css'
 const Login = () => {
+    // Login UI 
     const [open, setOpen] = useState(false);
+
+    //Social Media login
     const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
     const [signInWithGithub, githubUser, githubLoading, githubError] = useSignInWithGithub(auth);
     const [signInWithFacebook, facebookUser, facebookLoading, facebookError] = useSignInWithFacebook(auth);
+
+    // handle Email password Registration
     const [createUserWithEmailAndPassword, registeredUser, registerLoading, registerError, ] = useCreateUserWithEmailAndPassword(auth, {sendEmailVerification : true});
-    const HandleRegistration = (e)=>{
+
+    // update registration user name
+    const [updateProfile, updating, updateProfileError] = useUpdateProfile(auth);
+
+    // handle login with email password
+    const [signInWithEmailAndPassword,  loggedUser, loginLoading, loginError,] = useSignInWithEmailAndPassword(auth)
+
+
+    // handle registration function
+    const handleRegistration = async(e)=>{
         e.preventDefault()
+        const displayName = e.target.name.value;
         const email = e.target.email.value;
         const password = e.target.password.value;
-        createUserWithEmailAndPassword(email, password)
+        await createUserWithEmailAndPassword(email, password)
+        await updateProfile({ displayName })
         console.log(email, password);
+    }
+
+    //handle login function 
+    const handlelogin = (e)=>{
+        e.preventDefault()
+     
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+       signInWithEmailAndPassword(email, password)
+
     }
     if (googleLoading) {
         return <progress class="progress w-56"></progress>;
@@ -26,10 +52,11 @@ const Login = () => {
           </div>
         );
       }
-      if (facebookUser) {
+      if (facebookUser || registeredUser || loggedUser) {
+          console.log(loggedUser);
         return (
           <div>
-            <p>Signed In User: {facebookUser.email}</p>
+            {/* <p>Signed In User: {facebookUser.email}</p> */}
           </div>
         );
       }
@@ -37,7 +64,7 @@ const Login = () => {
         <div className=''>
             <div className={`container ${open? 'right-panel-active' : ''}`} id="container">
                 <div className="form-container sign-up-container">
-                    <form onSubmit={HandleRegistration}>
+                    <form onSubmit={handleRegistration}>
                         <h1>Create Account</h1>
                         <div className="social-container">
                             <a href="#" onClick={()=>signInWithFacebook()} className="social hover:bg-blue-400 hover:text-white"><i className="fab fa-facebook-f"></i></a>
@@ -52,7 +79,7 @@ const Login = () => {
                     </form>
                 </div>
                 <div className="form-container sign-in-container">
-                    <form action="#">
+                    <form onSubmit={handlelogin}>
                         <h1>Sign in</h1>
                         <div className="social-container">
                             <a href="#" onClick={()=>signInWithFacebook()} className="social hover:bg-blue-400 hover:text-white"><i className="fab fa-facebook-f"></i></a>
@@ -60,8 +87,8 @@ const Login = () => {
                             <a href="#" className="social  hover:bg-blue-600 hover:text-white"><i className="fab fa-linkedin-in"></i></a>
                         </div>
                         <span>or use your account</span>
-                        <input type="email" placeholder="Email" />
-                        <input type="password" placeholder="Password" />
+                        <input type="email" name='email' placeholder="Email" />
+                        <input type="password" name='password' placeholder="Password" />
                         <a href="#">Forgot your password?</a>
                         <button>Sign In</button>
                     </form>
