@@ -6,33 +6,26 @@ import { useParams } from 'react-router-dom';
 const Inventory = () => {
     const { id } = useParams()
     const URL = `https://pure-citadel-40053.herokuapp.com/${id}`;
+    const URLDev = `http://localhost:5000/${id}`;
     const [product, setProduct] = useState({})
     useEffect(() => {
-        axios.get(URL).then(resp => {
+        axios.get(URLDev).then(resp => {
             setProduct(resp.data);
         });
     }, [])
     const { name, description, imgUrl, price, quantity, supliar, specification } = product;
-    const handleDeliver =  (e) =>{
+    const handleDeliver = async (e) =>{
         e.preventDefault();
-        const {quantity, ...rest} = product;
+        const {quantity, _id, ...rest} = product;
          const newQuantity = quantity - 1;
-         const newQuantityString = newQuantity.toString()
-         
-         const newProduct = {quantity:newQuantityString, ...rest};
+         const newProduct = {quantity:newQuantity, ...rest};
          console.log(newProduct);
-         fetch(URL, {
-            method: 'PUT',
-            headers: {
-                'content-type': 'application/json',
-            },
-            body: JSON.stringify(newProduct)
-        })
-            .then(response => response.json())
-            .then(data => {
-                toast.success('You have successfully Delivered')
-               console.log(data);
-            })
+        const {data} = await axios.put(URLDev, newProduct);
+        if(data.modifiedCount){
+            toast.success('You have successfully Delivered')
+            setProduct(newProduct)
+        }
+         
 
         
     }
@@ -47,7 +40,7 @@ const Inventory = () => {
                         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{name}</h5>
                     </a>
                     <h5 className=" text-xl font-bold tracking-tight text-gray-700 dark:text-white">price: ${price}</h5>
-                    <h5 className="mb-2 text-sm font-bold tracking-tight text-gray-500 dark:text-white">In Stock: {quantity===0 ? 'Out of Stock' : quantity}</h5>
+                    <h5 className="mb-2 text-sm font-bold tracking-tight text-gray-500 dark:text-white"> {quantity===0 ? 'Out of Stock' : `In Stock:  ${quantity}`}</h5>
                     <h5 className="mb-2 text-sm font-bold tracking-tight text-gray-500 dark:text-white">Supliar: {supliar}</h5>
                     <h5 className="mb-2 text-sm  tracking-tight text-gray-400 dark:text-white">Unique Key: {id}</h5>
                     <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{description}</p>
@@ -181,12 +174,14 @@ const Inventory = () => {
                                             </div>
                                         </div>
                                         <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                                            <button
+                                            {
+                                                quantity === 0 ? <button disabled className="btn">Sold out</button> :<button
                                                 type="submit"
                                                 className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                             >
                                                 Deliver
                                             </button>
+                                            }
                                         </div>
                                     </div>
                                 </form>

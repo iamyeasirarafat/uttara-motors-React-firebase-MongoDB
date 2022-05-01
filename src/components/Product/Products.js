@@ -16,7 +16,7 @@ const Products = ({ product }) => {
                         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{name}</h5>
                     </a>
                     <h5 className=" text-xl font-bold tracking-tight text-gray-700 dark:text-white">price: ${price}</h5>
-                    <h5 className="mb-2 text-sm font-bold tracking-tight text-gray-500 dark:text-white">In Stock: {quantity===0 ? 'Out of Stock' : quantity}</h5>
+                    <h5 className="mb-2 text-sm font-bold tracking-tight text-gray-500 dark:text-white">{quantity===0 ? 'Out of Stock' : `In Stock:  ${quantity}`}</h5>
                     <h5 className="mb-2 text-sm font-bold tracking-tight text-gray-500 dark:text-white">Supliar: {supliar}</h5>
                     <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{description}</p>
                     <Link to={`/inventory/${_id}`} className="inline-flex absolute bottom-4 items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 ">

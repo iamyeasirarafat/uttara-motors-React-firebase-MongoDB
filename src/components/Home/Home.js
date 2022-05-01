@@ -5,8 +5,10 @@ import Products from '../Product/Products';
 
 const Home = () => {
     const [products, setProducts] = useState([])
+    const URLDev = `http://localhost:5000/`;
+    const URL = " https://pure-citadel-40053.herokuapp.com/";
     useEffect(() => {
-        axios.get(' https://pure-citadel-40053.herokuapp.com/').then(resp => {
+        axios.get(URLDev).then(resp => {
             setProducts(resp.data.slice(0,6))
         });
     }, [])
