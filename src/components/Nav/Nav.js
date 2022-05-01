@@ -2,7 +2,7 @@ import React from 'react';
 import logo from '../../assets/images/logo.png'
 const Nav = () => {
     return (
-        <div className="bg-slate-50 sticky">
+        <div className="bg-slate-50  ">
     <div className="navbar w-10/12 mx-auto ">
   <div className="flex-1">
     {/* <a href="/" className="btn btn-ghost normal-case text-xl">Uttara Motors</a> */}

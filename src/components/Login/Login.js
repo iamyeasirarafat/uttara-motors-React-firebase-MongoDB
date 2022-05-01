@@ -3,7 +3,7 @@ import './login.css'
 const Login = () => {
     const [open, setOpen] = useState(false)
     return (
-        <div>
+        <div className=''>
             <div className={`container ${open? 'right-panel-active' : ''}`} id="container">
                 <div className="form-container sign-up-container">
                     <form action="#">
