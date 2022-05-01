@@ -1,17 +1,39 @@
 import React, { useState } from 'react';
+import { useSignInWithFacebook, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth'
+import auth from '../../firebase/firebase.init';
 import './login.css'
 const Login = () => {
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(false);
+    const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
+    const [signInWithGithub, githubUser, githubLoading, githubError] = useSignInWithGithub(auth);
+    const [signInWithFacebook, facebookUser, facebookLoading, facebookError] = useSignInWithFacebook(auth);
+    if (googleLoading) {
+        return <progress class="progress w-56"></progress>;
+      }
+      if (googleError) {
+        return (
+          <div>
+            <p>Error: {googleError.message}</p>
+          </div>
+        );
+      }
+      if (facebookUser) {
+        return (
+          <div>
+            <p>Signed In User: {facebookUser.email}</p>
+          </div>
+        );
+      }
     return (
         <div className=''>
             <div className={`container ${open? 'right-panel-active' : ''}`} id="container">
                 <div className="form-container sign-up-container">
-                    <form action="#">
+                    <form onSubmit={HandleRegistration}>
                         <h1>Create Account</h1>
                         <div className="social-container">
-                            <a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
-                            <a href="#" className="social"><i className="fab fa-google-plus-g"></i></a>
-                            <a href="#" className="social"><i className="fab fa-linkedin-in"></i></a>
+                            <a href="#" onClick={()=>signInWithFacebook()} className="social hover:bg-blue-400 hover:text-white"><i className="fab fa-facebook-f"></i></a>
+                            <a href="#" onClick={()=>signInWithGoogle()} className="social  hover:bg-rose-500 hover:text-white"><i className="fab fa-google-plus-g"></i></a>
+                            <a href="#" className="social  hover:bg-blue-600 hover:text-white"><i className="fab fa-linkedin-in"></i></a>
                         </div>
                         <span>or use your email for registration</span>
                         <input type="text" placeholder="Name" />
@@ -24,9 +46,9 @@ const Login = () => {
                     <form action="#">
                         <h1>Sign in</h1>
                         <div className="social-container">
-                            <a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
-                            <a href="#" className="social"><i className="fab fa-google-plus-g"></i></a>
-                            <a href="#" className="social"><i className="fab fa-linkedin-in"></i></a>
+                            <a href="#" onClick={()=>signInWithFacebook()} className="social hover:bg-blue-400 hover:text-white"><i className="fab fa-facebook-f"></i></a>
+                            <a href="#" onClick={()=>signInWithGoogle()} className="social  hover:bg-rose-500 hover:text-white"><i className="fab fa-google-plus-g"></i></a>
+                            <a href="#" className="social  hover:bg-blue-600 hover:text-white"><i className="fab fa-linkedin-in"></i></a>
                         </div>
                         <span>or use your account</span>
                         <input type="email" placeholder="Email" />
