@@ -32,7 +32,9 @@ const Nav = () => {
               <li><a href="/" className='m-0'>Settings</a></li>
               <li><a href="" onClick={()=>signOut(auth)} className='m-0'>Logout</a></li>
             </ul>
-          </div> : <Link to="/login" title='Login/Register' className='btn m-0 btn-circle'><i className="fa-solid fa-user-plus"></i></Link>
+          </div> : <div className="tooltip tooltip-left" data-tip="Login/Register">
+          <Link to="/login"  className='btn m-0 btn-circle'><i className="fa-solid fa-user-plus"></i></Link>
+          </div>
           }
         </div>
       </div>

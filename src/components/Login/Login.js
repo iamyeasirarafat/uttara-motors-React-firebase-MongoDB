@@ -76,10 +76,10 @@ const Login = () => {
                             <a href="#" className="social  hover:bg-blue-600 hover:text-white"><i className="fab fa-linkedin-in"></i></a>
                         </div>
                         <span>or use your email for registration</span>
-                        <input type="text" name='name' placeholder="Name" />
-                        <input type="email" name='email' placeholder="Email" />
-                        <input type="password" name='password' placeholder="Password" />
-                        <button>Sign Up</button>
+                        <input required className="mt-1  focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" type="text" name='name' placeholder="Name" />
+                        <input required className="mt-1  focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" type="email" name='email' placeholder="Email" />
+                        <input required className="mt-1  focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" type="password" name='password' placeholder="Password" />
+                        <button className="mt-5">Sign Up</button>
                     </form>
                 </div>
                 <div className="form-container sign-in-container">
@@ -91,8 +91,8 @@ const Login = () => {
                             <a href="#" className="social  hover:bg-blue-600 hover:text-white"><i className="fab fa-linkedin-in"></i></a>
                         </div>
                         <span>or use your account</span>
-                        <input type="email" name='email' placeholder="Email" />
-                        <input type="password" name='password' placeholder="Password" />
+                        <input required className="mt-1  focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" type="email" name='email' placeholder="Email" />
+                        <input required className="mt-1  focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"type="password" name='password' placeholder="Password" />
                         <a className='text-sm my-4 hover:text-pink-500' href="#">Forgot your password?</a>
                         <button>Sign In</button>
                     </form>
