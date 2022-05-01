@@ -5,6 +5,7 @@ import ManageProducts from './components/ManageProducts/ManageProducts';
 import Nav from './components/Nav/Nav';
 import Login  from "./components/Login/Login";
 import { Toaster } from "react-hot-toast";
+import Footer from "./components/Footer/Footer";
 function App() {
   return (
     <div className="App">
@@ -15,6 +16,7 @@ function App() {
         <Route path="login" element ={<Login></Login>}/>
         <Route path="manageProducts" element={<ManageProducts></ManageProducts>}/>
       </Routes>
+      <Footer></Footer>
       <div><Toaster/></div>
     </div>
   );

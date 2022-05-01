@@ -69,7 +69,7 @@ const Login = () => {
             <div className={`container ${open? 'right-panel-active' : ''}`} id="container">
                 <div className="form-container sign-up-container">
                     <form onSubmit={handleRegistration}>
-                        <h1>Create Account</h1>
+                        <h1 className='text-2xl text-slate-600'>Create Account</h1>
                         <div className="social-container">
                             <a href="#" onClick={()=>signInWithFacebook()} className="social hover:bg-blue-400 hover:text-white"><i className="fab fa-facebook-f"></i></a>
                             <a href="#" onClick={()=>signInWithGoogle()} className="social  hover:bg-rose-500 hover:text-white"><i className="fab fa-google-plus-g"></i></a>
@@ -84,7 +84,7 @@ const Login = () => {
                 </div>
                 <div className="form-container sign-in-container">
                     <form onSubmit={handlelogin}>
-                        <h1>Sign in</h1>
+                        <h1 className='text-2xl text-slate-600'>Sign in</h1>
                         <div className="social-container">
                             <a href="#" onClick={()=>signInWithFacebook()} className="social hover:bg-blue-400 hover:text-white"><i className="fab fa-facebook-f"></i></a>
                             <a href="#" onClick={()=>signInWithGoogle()} className="social  hover:bg-rose-500 hover:text-white"><i className="fab fa-google-plus-g"></i></a>
@@ -93,7 +93,7 @@ const Login = () => {
                         <span>or use your account</span>
                         <input type="email" name='email' placeholder="Email" />
                         <input type="password" name='password' placeholder="Password" />
-                        <a href="#">Forgot your password?</a>
+                        <a className='text-sm my-4 hover:text-pink-500' href="#">Forgot your password?</a>
                         <button>Sign In</button>
                     </form>
                 </div>
@@ -101,12 +101,12 @@ const Login = () => {
                     <div className="overlay">
                         <div className="overlay-panel overlay-left">
                             <h1>Welcome Back!</h1>
-                            <p>To keep connected with us please login with your personal info</p>
+                            <p className='my-3'>To keep connected with us please login with your personal info</p>
                             <button className="ghost" onClick={()=>{setOpen(!open)}} id="signIn">Sign In</button>
                         </div>
                         <div className="overlay-panel overlay-right">
                             <h1>Hello, Friend!</h1>
-                            <p>Enter your personal details and start journey with us</p>
+                            <p className='my-3'>Enter your personal details and start journey with us</p>
                             <button className="ghost" onClick={()=>{setOpen(!open)}} id="signUp">Sign Up</button>
                         </div>
                     </div>
