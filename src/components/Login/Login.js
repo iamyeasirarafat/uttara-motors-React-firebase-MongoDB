@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useCreateUserWithEmailAndPassword, useSignInWithEmailAndPassword, useSignInWithFacebook, useSignInWithGithub, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth'
+import toast from 'react-hot-toast';
+import { useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase/firebase.init';
 import './login.css'
 const Login = () => {
@@ -13,13 +15,16 @@ const Login = () => {
 
     // handle Email password Registration
     const [createUserWithEmailAndPassword, registeredUser, registerLoading, registerError, ] = useCreateUserWithEmailAndPassword(auth, {sendEmailVerification : true});
+    
 
     // update registration user name
     const [updateProfile, updating, updateProfileError] = useUpdateProfile(auth);
 
     // handle login with email password
-    const [signInWithEmailAndPassword,  loggedUser, loginLoading, loginError,] = useSignInWithEmailAndPassword(auth)
-
+    const [signInWithEmailAndPassword,  loggedUser, loginLoading, loginError,] = useSignInWithEmailAndPassword(auth);
+        const navigate = useNavigate();
+        const location = useLocation();
+        const from = location.state?.from?.pathname || "/";
 
     // handle registration function
     const handleRegistration = async(e)=>{
@@ -33,33 +38,32 @@ const Login = () => {
     }
 
     //handle login function 
-    const handlelogin = (e)=>{
+    const handlelogin = async (e)=>{
         e.preventDefault()
-     
         const email = e.target.email.value;
         const password = e.target.password.value;
-       signInWithEmailAndPassword(email, password)
-
+        toast.success('Please Wait')
+     await signInWithEmailAndPassword(email, password)
+        
     }
-    if (googleLoading) {
-        return <progress class="progress w-56"></progress>;
+
+    // handle loading
+    if (googleLoading || loginLoading || updating || registerLoading || facebookLoading || githubLoading) {
+        return <div className="flex items-center justify-center"><progress className="progress mt-[20%] w-56"></progress></div>
       }
-      if (googleError || registerError) {
-        return (
-          <div>
-            <p>Error: {googleError.message}</p>
-            {/* <p>Error: {registerError.message}</p> */}
-          </div>
-        );
+
+      //handle error
+      if (googleError || registerError || loginError || updateProfileError || facebookError || githubError) {
+        toast.error(`${googleError? googleError.message.slice(22,) : ''} ${githubError? githubError.message.slice(22) : ''} ${facebookError? facebookError.message.slice(22) : ''} ${registerError? registerError.message.slice(22,) : ''} ${loginError? loginError.message.slice(22,) : ''}  ${updateProfileError? updateProfileError.message.slice(22,) : ''}`, {id:'loginError'})
       }
-      if (facebookUser || registeredUser || loggedUser) {
-          console.log(loggedUser);
-        return (
-          <div>
-            {/* <p>Signed In User: {facebookUser.email}</p> */}
-          </div>
-        );
+
+      //handle user
+      if (facebookUser || registeredUser || loggedUser || githubUser || googleUser) {
+          toast.success('Successfully Logged in', {id: 'logged in'})
+        navigate(from, { replace: true });
       }
+
+      //login/registration form
     return (
         <div className=''>
             <div className={`container ${open? 'right-panel-active' : ''}`} id="container">
