@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSignInWithFacebook, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth'
+import { useCreateUserWithEmailAndPassword, useSignInWithFacebook, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth'
 import auth from '../../firebase/firebase.init';
 import './login.css'
 const Login = () => {
@@ -7,13 +7,22 @@ const Login = () => {
     const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
     const [signInWithGithub, githubUser, githubLoading, githubError] = useSignInWithGithub(auth);
     const [signInWithFacebook, facebookUser, facebookLoading, facebookError] = useSignInWithFacebook(auth);
+    const [createUserWithEmailAndPassword, registeredUser, registerLoading, registerError, ] = useCreateUserWithEmailAndPassword(auth, {sendEmailVerification : true});
+    const HandleRegistration = (e)=>{
+        e.preventDefault()
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+        createUserWithEmailAndPassword(email, password)
+        console.log(email, password);
+    }
     if (googleLoading) {
         return <progress class="progress w-56"></progress>;
       }
-      if (googleError) {
+      if (googleError || registerError) {
         return (
           <div>
             <p>Error: {googleError.message}</p>
+            {/* <p>Error: {registerError.message}</p> */}
           </div>
         );
       }
@@ -36,9 +45,9 @@ const Login = () => {
                             <a href="#" className="social  hover:bg-blue-600 hover:text-white"><i className="fab fa-linkedin-in"></i></a>
                         </div>
                         <span>or use your email for registration</span>
-                        <input type="text" placeholder="Name" />
-                        <input type="email" placeholder="Email" />
-                        <input type="password" placeholder="Password" />
+                        <input type="text" name='name' placeholder="Name" />
+                        <input type="email" name='email' placeholder="Email" />
+                        <input type="password" name='password' placeholder="Password" />
                         <button>Sign Up</button>
                     </form>
                 </div>
