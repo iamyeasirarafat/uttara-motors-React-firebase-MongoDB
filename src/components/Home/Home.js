@@ -8,7 +8,7 @@ const Home = () => {
     const URLDev = `http://localhost:5000/`;
     const URL = " https://pure-citadel-40053.herokuapp.com/";
     useEffect(() => {
-        axios.get(URLDev).then(resp => {
+        axios.get(URL).then(resp => {
             setProducts(resp.data.slice(0,6))
         });
     }, [])
@@ -23,7 +23,7 @@ const Home = () => {
                     products.map(product =><Products key={product._id} product={product}></Products>)
                 }
             </div>
-            <button className="btn btn-primary w-full my-10 ">Manage all Products</button>
+            
             </div>
         </div>
     );

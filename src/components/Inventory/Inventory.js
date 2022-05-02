@@ -1,15 +1,16 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Inventory = () => {
     const { id } = useParams()
+    const navigate= useNavigate();
     const URL = `https://pure-citadel-40053.herokuapp.com/${id}`;
     const URLDev = `http://localhost:5000/${id}`;
     const [product, setProduct] = useState({})
     useEffect(() => {
-        axios.get(URLDev).then(resp => {
+        axios.get(URL).then(resp => {
             setProduct(resp.data);
         });
     }, [])
@@ -20,7 +21,7 @@ const Inventory = () => {
         const newQuantity = quantity - 1;
         const newProduct = { quantity: newQuantity, ...rest };
      
-        const { data } = await axios.put(URLDev, newProduct);
+        const { data } = await axios.put(URL, newProduct);
         if (data.modifiedCount) {
             toast.success('You have successfully Delivered')
             setProduct(newProduct)
@@ -34,7 +35,7 @@ const Inventory = () => {
         const newQuantity = parseInt(quantity )+ parseInt(inputValue);
         const newProduct = { quantity: newQuantity, ...rest };
         console.log(newQuantity);
-        const { data } = await axios.put(URLDev, newProduct);
+        const { data } = await axios.put(URL, newProduct);
         e.target.restack.value = '';
         if (data.modifiedCount) {
             toast.success('You have successfully Restacked')
@@ -207,6 +208,9 @@ const Inventory = () => {
                         <input className="mt-1 focus:ring-indigo-500 focus:border-indigo-500   shadow-sm sm:text-sm border-gray-300 rounded-md" type="number" name="restack" /> <button className="btn ml-5  btn-info">Restack</button>
                     </form>
                 </div>
+            </div>
+            <div className="w-8/12 mx-auto">
+            <button onClick={()=>navigate('/manageProducts')} className="btn btn-primary w-full my-10 ">Manage all Products</button>
             </div>
         </div>
     );

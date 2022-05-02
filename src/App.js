@@ -8,6 +8,7 @@ import { Toaster } from "react-hot-toast";
 import Footer from "./components/Footer/Footer";
 import Inventory from "./components/Inventory/Inventory";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute"
+import AddProduct from "./components/AddProduct/AddProduct";
 function App() {
   return (
     <div className="App">
@@ -16,7 +17,8 @@ function App() {
         <Route path="/"  element={<Home></Home>}/>
         <Route path="home" element={<Home></Home>}/>
         <Route path="login" element ={<Login></Login>}/>
-        <Route path="manageProducts" element={<ManageProducts></ManageProducts>}/>
+        <Route path="manageProducts" element={<ProtectedRoute><ManageProducts></ManageProducts></ProtectedRoute>}/>
+        <Route path="addProduct" element={<ProtectedRoute><AddProduct></AddProduct></ProtectedRoute>}/>
         <Route path="inventory/:id" element={<ProtectedRoute><Inventory></Inventory></ProtectedRoute>}/>
       </Routes>
       <Footer></Footer>
