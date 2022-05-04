@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import toast from 'react-hot-toast';
 import auth from '../../firebase/firebase.init';
 
 const AddProduct = () => {
@@ -21,8 +22,11 @@ const AddProduct = () => {
         const specification = e.target.specification.value;
         const product = {uid, name, quantity, specification, supliar, description, price, imgUrl};
         const {data} = await axios.post(URL, product);
-
-        console.log(data);
+        e.target.reset()
+        if(data.insertedId){
+            toast.success('You have successfully inserted a new product')
+        }
+       
     }
     return (
         <div>
