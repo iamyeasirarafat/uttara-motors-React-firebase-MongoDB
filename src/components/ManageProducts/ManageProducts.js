@@ -11,7 +11,7 @@ const ManageProducts = () => {
     const URLDev = `http://localhost:5000/`;
     const URL = " https://pure-citadel-40053.herokuapp.com/";
     useEffect(() => {
-        axios.get(URLDev).then(resp => {
+        axios.get(URL).then(resp => {
             setProducts(resp.data)
         });
     }, []);
@@ -20,7 +20,7 @@ const ManageProducts = () => {
     const handleDelete = async (id) => {
       
       if(window.confirm('Are you sure you want to delete?')){
-        const {status} = await axios.delete(`http://localhost:5000/${id}`);
+        const {status} = await axios.delete(`https://pure-citadel-40053.herokuapp.com/${id}`);
         if(status === 200) {
             toast.success('You have successfully deleted')
             const rest = products.filter(product => product._id !== id);
