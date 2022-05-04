@@ -9,7 +9,7 @@ const AddProduct = () => {
     if (loading) {
       return <progress className="progress mt-[20%] w-56"></progress>
     }
-   const URL = 'http://localhost:5000'
+   const URL = 'https://pure-citadel-40053.herokuapp.com/'
     const handleAddItem = async (e) => {
         e.preventDefault();
         const uid = user.uid;
