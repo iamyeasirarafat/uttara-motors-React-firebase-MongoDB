@@ -39,7 +39,7 @@ const MyItems = () => {
    
     return (
         <div className="">
-            <button onClick={()=>navigate('/addProduct')} className=" float-right mr-10  btn-primary">Add New Product</button>
+            <button onClick={()=>navigate('/addProduct')} className=" ml-auto mt-5 mr-10 block btn-primary">Add New Product</button>
             <div className="w-9/12 mx-auto">
             <h2 className="text-center text-3xl font-semibold my-4" >Your products</h2>
            {

@@ -15,18 +15,23 @@ const Inventory = () => {
         });
     }, [])
     const { name, description, imgUrl, price, quantity, supliar, specification } = product;
+
+    //handle deliver 
     const handleDeliver = async (e) => {
         e.preventDefault();
         const { quantity, _id, ...rest } = product;
         const newQuantity = quantity - 1;
         const newProduct = { quantity: newQuantity, ...rest };
-     
+        e.target.reset()
         const { data } = await axios.put(URL, newProduct);
         if (data.modifiedCount) {
             toast.success('You have successfully Delivered')
             setProduct(newProduct)
+            
         }
      }
+
+     //handle restack
      const handleRestack = async(e) => {
         e.preventDefault();
         const inputValue = e.target.restack.value;
@@ -40,6 +45,7 @@ const Inventory = () => {
         if (data.modifiedCount) {
             toast.success('You have successfully Restacked')
             setProduct(newProduct)
+            
         }
      }
     return (
@@ -48,9 +54,9 @@ const Inventory = () => {
             <div className="md:flex items-center border-b-2">
                 <img src={imgUrl} alt="" />
                 <div className="p-5">
-                    <a href="/">
+                    
                         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{name}</h5>
-                    </a>
+                   
                     <h5 className=" text-xl font-bold tracking-tight text-gray-700 dark:text-white">price: ${price}</h5>
                     <h5 className="mb-2 text-sm font-bold tracking-tight text-gray-500 dark:text-white"> {quantity === 0 ? 'Out of Stock' : `In Stock:  ${quantity}`}</h5>
                     <h5 className="mb-2 text-sm font-bold tracking-tight text-gray-500 dark:text-white">Supliar: {supliar}</h5>
@@ -124,7 +130,8 @@ const Inventory = () => {
                                             >
                                                 <option>Bangladesh</option>
                                                 <option>United States</option>
-                                                <option>Indiya</option>
+                                                <option>India</option>
+                                                <option>Canada</option>
                                             </select>
                                         </div>
 
@@ -176,7 +183,7 @@ const Inventory = () => {
                                             </label>
                                             <input
                                                 required
-                                                type="text"
+                                                type="number"
                                                 name="postal-code"
                                                 id="postal-code"
                                                 autoComplete="postal-code"
@@ -205,7 +212,7 @@ const Inventory = () => {
                 <h2 className="md:text-left capitalize my-5  text-xl font-semibold ">Restack?</h2>
                 <div className="">
                     <form className="grid grid-cols-2" onSubmit={handleRestack}>
-                        <input className="mt-1 focus:ring-indigo-500 focus:border-indigo-500   shadow-sm sm:text-sm border-gray-300 rounded-md" type="number" name="restack" /> <button className="btn ml-5  btn-info">Restack</button>
+                        <input required className="mt-1 focus:ring-indigo-500 focus:border-indigo-500   shadow-sm sm:text-sm border-gray-300 rounded-md" type="number" name="restack" /> <button className="btn ml-5 text-xs md:text-base btn-info">Restack</button>
                     </form>
                 </div>
             </div>

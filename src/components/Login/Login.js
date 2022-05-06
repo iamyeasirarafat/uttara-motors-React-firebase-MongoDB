@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useCreateUserWithEmailAndPassword, useSignInWithEmailAndPassword, useSignInWithFacebook, useSignInWithGithub, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth'
+import { useCreateUserWithEmailAndPassword, useSignInWithEmailAndPassword, useSignInWithFacebook, useSignInWithYahoo, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth'
 import toast from 'react-hot-toast';
 import { useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase/firebase.init';
@@ -10,7 +10,7 @@ const Login = () => {
 
     //Social Media login
     const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
-    const [signInWithGithub, githubUser, githubLoading, githubError] = useSignInWithGithub(auth);
+    const [signInWithYahoo, yahooUser, yahooLoading, yahooError] = useSignInWithYahoo(auth);
     const [signInWithFacebook, facebookUser, facebookLoading, facebookError] = useSignInWithFacebook(auth);
 
     // handle Email password Registration
@@ -48,24 +48,26 @@ const Login = () => {
     }
 
     // handle loading
-    if (googleLoading || loginLoading || updating || registerLoading || facebookLoading || githubLoading) {
+    if (googleLoading || loginLoading || updating || registerLoading || facebookLoading || yahooLoading) {
         return <div className="flex items-center justify-center"><progress className="progress mt-[20%] w-56"></progress></div>
       }
 
       //handle error
-      if (googleError || registerError || loginError || updateProfileError || facebookError || githubError) {
-        toast.error(`${googleError? googleError.message.slice(22,) : ''} ${githubError? githubError.message.slice(22) : ''} ${facebookError? facebookError.message.slice(22) : ''} ${registerError? registerError.message.slice(22,) : ''} ${loginError? loginError.message.slice(22,) : ''}  ${updateProfileError? updateProfileError.message.slice(22,) : ''}`, {id:'loginError'})
+      if (googleError || registerError || loginError || updateProfileError || facebookError || yahooError) {
+        toast.error(`${googleError? googleError.message.slice(22,) : ''} ${yahooError? yahooError.message.slice(22) : ''} ${facebookError? facebookError.message.slice(22) : ''} ${registerError? registerError.message.slice(22,) : ''} ${loginError? loginError.message.slice(22,) : ''}  ${updateProfileError? updateProfileError.message.slice(22,) : ''}`, {id:'loginError'})
       }
 
       //handle user
-      if (facebookUser || registeredUser || loggedUser || githubUser || googleUser) {
-          toast.success('Successfully Logged in', {id: 'logged in'})
+      if (facebookUser || registeredUser || loggedUser || yahooUser || googleUser) {
+          toast.success('Successfully Logged in', {id: 'loginError'})
         navigate(from, { replace: true });
       }
 
       //login/registration form
     return (
         <div className=''>
+
+            {/* desktop login form */}
             <div className={`container ${open? 'right-panel-active' : ''}`} id="container">
                 <div className="form-container sign-up-container">
                     <form onSubmit={handleRegistration}>
@@ -73,7 +75,7 @@ const Login = () => {
                         <div className="social-container">
                             <a href="#" onClick={()=>signInWithFacebook()} className="social hover:bg-blue-400 hover:text-white"><i className="fab fa-facebook-f"></i></a>
                             <a href="#" onClick={()=>signInWithGoogle()} className="social  hover:bg-rose-500 hover:text-white"><i className="fab fa-google-plus-g"></i></a>
-                            <a href="#" className="social  hover:bg-blue-600 hover:text-white"><i className="fab fa-linkedin-in"></i></a>
+                            <a href="#" onClick={()=>signInWithYahoo()} className="social  hover:bg-blue-600 hover:text-white"><i className="fab fa-yahoo"></i></a>
                         </div>
                         <span>or use your email for registration</span>
                         <input required className="mt-1  focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" type="text" name='name' placeholder="Name" />
@@ -88,7 +90,7 @@ const Login = () => {
                         <div className="social-container">
                             <a href="#" onClick={()=>signInWithFacebook()} className="social hover:bg-blue-400 hover:text-white"><i className="fab fa-facebook-f"></i></a>
                             <a href="#" onClick={()=>signInWithGoogle()} className="social  hover:bg-rose-500 hover:text-white"><i className="fab fa-google-plus-g"></i></a>
-                            <a href="#" className="social  hover:bg-blue-600 hover:text-white"><i className="fab fa-linkedin-in"></i></a>
+                            <a href="#" onClick={()=>signInWithYahoo()} className="social  hover:bg-blue-600 hover:text-white"><i className="fab fa-yahoo"></i></a>
                         </div>
                         <span>or use your account</span>
                         <input required className="mt-1  focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" type="email" name='email' placeholder="Email" />

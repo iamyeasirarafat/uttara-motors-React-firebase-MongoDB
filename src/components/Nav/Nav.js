@@ -17,8 +17,8 @@ const Nav = () => {
             <Link to='/'><img className="w-36" src={logo} alt="" /></Link>
 
             <ul className='flex'>
-              <li className='mr-7 hover:text-rose-600 duration-300'><Link to="/blogs">Blogs</Link></li>
-              <li className='mr-7 hover:text-rose-600 duration-300'><Link to="/aboutUs">About Us</Link></li>
+              <li className='mr-3 hover:text-rose-600 duration-300'><Link to="/blogs">Blogs</Link></li>
+              <li className='mr-2 hover:text-rose-600 duration-300'><Link to="/aboutUs">About Us</Link></li>
             </ul>
 
           </div>
