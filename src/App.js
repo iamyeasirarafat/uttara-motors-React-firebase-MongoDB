@@ -11,6 +11,7 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute"
 import AddProduct from "./components/AddProduct/AddProduct";
 import MyItems from "./components/MyItems/MyItems";
 import Blogs from "./components/Blogs/Blogs";
+import PageNotFound from "./components/PageNotFound/PageNotFound";
 function App() {
   return (
     <div className="App">
@@ -24,6 +25,7 @@ function App() {
         <Route path="addProduct" element={<ProtectedRoute><AddProduct></AddProduct></ProtectedRoute>} />
         <Route path="myItems" element={<ProtectedRoute><MyItems></MyItems></ProtectedRoute>} />
         <Route path="inventory/:id" element={<ProtectedRoute><Inventory></Inventory></ProtectedRoute>} />
+        <Route path="*" element={<PageNotFound/>}/>
       </Routes>
       <Footer></Footer>
       <div><Toaster /></div>

@@ -4,9 +4,7 @@ import 'react-alice-carousel/lib/alice-carousel.css';
 import tesla from "../../assets/images/teslaLogo.png"
 import suzuki from "../../assets/images/suzukiLogo.png"
 import toyota from "../../assets/images/toyotaLogo.jpg"
-import bmw from "../../assets/images/bmwLogo.png"
-import mersedes from "../../assets/images/mersedesLogo.png"
-import mitshubishi from "../../assets/images/mitshubishiLogo.png"
+
 import audi from "../../assets/images/audiLogo.png"
 import yamaha from "../../assets/images/yamahaLogo.png"
 const PopularBrands = () => {
@@ -20,9 +18,7 @@ const PopularBrands = () => {
         <div className="item  w-10/12 " data-value="1"><img src={tesla} alt="" /></div>,
         <div className="item  w-10/12 " data-value="2"><img src={suzuki} alt="" /></div>,
         <div className="item  w-10/12 " data-value="3"><img src={toyota} alt="" /></div>,
-        // <div className="item" data-value="4"><img src={bmw} alt="" /></div>,
-        // <div className="item" data-value="5"><img src={mersedes} alt="" /></div>,
-        // <div className="item" data-value="6"><img src={mitshubishi} alt="" /></div>,
+       
         <div className="item w-10/12" data-value="7"><img src={audi} alt="" /></div>,
         <div className="item w-10/12" data-value="8"><img src={yamaha} alt="" /></div>,
     ];
