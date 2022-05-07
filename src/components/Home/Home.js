@@ -5,7 +5,9 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import auth from '../../firebase/firebase.init';
 import Banner from '../Banner/Banner';
+import PopularBrands from '../PopularBrands/PopularBrands';
 import Products from '../Product/Products';
+import ProductShowcase from '../ProductShowcase/ProductShowcase';
 
 const Home = () => {
     const navigate = useNavigate();
@@ -44,6 +46,7 @@ const Home = () => {
     return (
         <div className="">
             <Banner></Banner>
+            <PopularBrands/>
             <div className="w-9/12 mx-auto">
                 <h2 className="text-center text-3xl font-semibold my-7" >Browse Our Range</h2>
                 <div className="md:grid md:grid-cols-2 lg:grid-cols-3  gap-6  mt-4">
@@ -56,6 +59,7 @@ const Home = () => {
                     <button onClick={() => navigate('/manageProducts')} className="btn btn-primary w-full my-10 ">Manage all Products</button>
                 </div>: ''
                 }
+                <ProductShowcase/>
             </div>
         </div>
     );
