@@ -18,7 +18,7 @@ const MyItems = () => {
         });
     }, []);
     if (loading) {
-      return <p className='text-center text-slate-300'>initializing navbar ....</p>
+      return <progress className="progress mt-[20%] w-56"></progress>
     }
 
       // handle delete button 

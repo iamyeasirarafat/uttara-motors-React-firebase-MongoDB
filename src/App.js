@@ -10,6 +10,7 @@ import Inventory from "./components/Inventory/Inventory";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute"
 import AddProduct from "./components/AddProduct/AddProduct";
 import MyItems from "./components/MyItems/MyItems";
+import Blogs from "./components/Blogs/Blogs";
 function App() {
   return (
     <div className="App">
@@ -18,6 +19,7 @@ function App() {
         <Route path="/" element={<Home></Home>} />
         <Route path="home" element={<Home></Home>} />
         <Route path="login" element={<Login></Login>} />
+        <Route path="blogs" element={<Blogs></Blogs>} />
         <Route path="manageProducts" element={<ProtectedRoute><ManageProducts></ManageProducts></ProtectedRoute>} />
         <Route path="addProduct" element={<ProtectedRoute><AddProduct></AddProduct></ProtectedRoute>} />
         <Route path="myItems" element={<ProtectedRoute><MyItems></MyItems></ProtectedRoute>} />

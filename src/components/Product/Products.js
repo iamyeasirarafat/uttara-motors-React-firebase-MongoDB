@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import auth from '../../firebase/firebase.init';
 
 const Products = ({ product, handleDelete }) => {
-    console.log(handleDelete);
+   
     const {_id, name, description, imgUrl, price, quantity, supliar } = product;
     const [user, loading] = useAuthState(auth);
   if (loading) {

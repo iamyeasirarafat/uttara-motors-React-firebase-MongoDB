@@ -1,10 +1,15 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+import auth from '../../firebase/firebase.init';
 import Banner from '../Banner/Banner';
 import Products from '../Product/Products';
 
 const Home = () => {
+    const navigate = useNavigate();
+    const [user, loading] = useAuthState(auth);
     const [products, setProducts] = useState([])
     const displayProduct = products.slice(0, 6);
     const URLDev = `http://localhost:5000/`;
@@ -14,6 +19,12 @@ const Home = () => {
             setProducts(resp.data)
         });
     }, []);
+
+    // handle user 
+    ;
+  if (loading) {
+    return 
+  }
         // handle delete button 
         const handleDelete = async (id) => {
       
@@ -34,13 +45,17 @@ const Home = () => {
         <div className="">
             <Banner></Banner>
             <div className="w-9/12 mx-auto">
-                <h2 className="text-center text-3xl font-semibold my-4" >Browse Our Range</h2>
+                <h2 className="text-center text-3xl font-semibold my-7" >Browse Our Range</h2>
                 <div className="md:grid md:grid-cols-2 lg:grid-cols-3  gap-6  mt-4">
                     {
                         displayProduct.map(product => <Products handleDelete = {handleDelete} key={product._id} product={product}></Products>)
                     }
                 </div>
-
+                {
+                    user ? <div className="w-8/12 mx-auto">
+                    <button onClick={() => navigate('/manageProducts')} className="btn btn-primary w-full my-10 ">Manage all Products</button>
+                </div>: ''
+                }
             </div>
         </div>
     );
