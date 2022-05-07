@@ -1,70 +1,31 @@
-# Getting Started with Create React App
+# UttoraMotors, by [Yeasir Arafat](https://www.facebook.com/iamyeasirarafat1)
+## Project name: [Uttora Motors](https://uttaramotors-e3d80.web.app//)
+You can run run project at [Live site](https://uttaramotors-e3d80.web.app//)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### `Some features are written bellow`
+- This webSite is created using `ReactJs`
+- I have used `React Router` in this project
+- I have used `Tailwind css ` for Design  my project.
+- I have use `react hot Toast` for showing error and other notifications.
+- I have used `Firebase`  for my Authentication and user creation. 
+- I have implement `facebook, yahoo, google and email password` login system
+ 
+- user can` taggle` between sign in and regestration 
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- there have a `blog` section you can check 
+- there is a proceed Deliver section that is `private route` you have to log in to see that.
+- there is also My items and manage items section that is `private route` you have to log in to see that.
+- This site is fully `responsive` you can use it on your mobile also
+- By clicking your `profile icon` you can see your `Profile information and update your information` and there is `sign out` button also.
+- user can add delete or update product
+- there is a funny `404` page that you can check.
+### `using Technology in this project`
+- react js
+- react bootstrap
+- react Router
+- react toastify
+- firebase auth
+- dotenv
+- express js
+- cors middleware
+- mongo DB
